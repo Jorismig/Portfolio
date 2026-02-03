@@ -1,0 +1,246 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: radial-gradient(
+        circle at top,
+        var(--bg-dark-2),
+        var(--bg-dark)
+    );
+    color: var(--text-main);
+    overflow: hidden;
+}
+
+/* Desktop OS */
+#desktop {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0, 246, 255, 0.05),
+            rgba(139, 92, 246, 0.05)
+        );
+}
+/* =======================
+   Icônes Desktop
+======================= */
+
+.icon {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    width: 90px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.icon:nth-child(2) { top: 160px; }
+.icon:nth-child(3) { top: 280px; }
+.icon:nth-child(4) { top: 400px; }
+
+.icon-img {
+    font-size: 42px;
+    display: block;
+    margin-bottom: 6px;
+    transition: transform 0.25s ease;
+}
+
+.icon-label {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* Hover */
+.icon:hover .icon-img {
+    transform: scale(1.15);
+}
+
+.icon:hover .icon-label {
+    color: var(--neon-cyan);
+}
+.icon:hover {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 12px var(--neon-pink));
+}
+/* =======================
+   Barre de statut
+======================= */
+
+#status-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 42px;
+    background: var(--glass-bg);
+    backdrop-filter: var(--blur);
+    border-top: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px;
+    font-size: 14px;
+}
+
+.status-left {
+    color: var(--neon-violet);
+    font-weight: 600;
+}
+
+.status-right {
+    color: var(--text-main);
+}
+/* =======================
+   Fenêtres OS
+======================= */
+
+.window {
+    position: absolute;
+    top: 120px;
+    left: 160px;
+    width: 420px;
+    max-width: 90vw;
+    max-height: 85vh;
+    overflow: auto;
+    background: var(--glass-bg);
+    backdrop-filter: var(--blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    display: none;
+    flex-direction: column;
+    z-index: 10;
+
+}
+
+.window-header {
+    height: 42px;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: move;
+    background: linear-gradient(
+        90deg,
+        rgba(0, 246, 255, 0.15),
+        rgba(139, 92, 246, 0.15)
+    );
+    border-bottom: 1px solid var(--glass-border);
+    font-weight: 600;
+}
+
+.window-content {
+    padding: 16px;
+    font-size: 14px;
+    color: var(--text-main);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--neon-pink);
+    font-size: 16px;
+    cursor: pointer;
+}
+/* Hover icône - glow neon */
+.icon:hover .icon-img {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 10px var(--neon-cyan))
+            drop-shadow(0 0 20px var(--neon-cyan));
+}
+
+/* Barre de statut - glow léger */
+#status-bar {
+    box-shadow: 0 0 20px rgba(0, 246, 255, 0.2);
+}
+
+/* Fenêtres - pop elastic initiale */
+.window {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: box-shadow 0.2s ease;
+}
+#avatar {
+    position: absolute;
+    bottom: 80px;
+    right: 40px;
+    width: 72px;
+    height: 72px;
+    cursor: pointer;
+    z-index: 9999;
+}
+
+#avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 255, 0.6));
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Hover effect */
+#avatar:hover img {
+    transform: scale(1.2) rotate(8deg);
+    filter:
+        drop-shadow(0 0 15px var(--neon-pink))
+        drop-shadow(0 0 30px var(--neon-pink));
+}
+
+.window.active {
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
+}
+@media (max-width: 768px) {
+
+    .icon {
+        left: 20px !important;
+        font-size: 14px;
+    }
+
+    .window {
+        width: 95vw;
+        height: auto;
+        left: 2.5vw !important;
+        top: 10vh !important;
+    }
+
+    #avatar {
+        display: none;
+    }
+}
+.cursor {
+    color: var(--neon-cyan);
+    animation: blink 1s infinite;
+    font-weight: bold;
+}
+
+@keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+}
+.window-content p {
+    white-space: pre-line;
+    line-height: 1.6;
+}
+
+.window-content strong {
+    color: var(--neon-cyan);
+}
+#stars-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+}
